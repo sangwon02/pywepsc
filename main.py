@@ -1,1 +1,5 @@
-#오늘 이론에 대해서 강의 다 들음
+import requests
+
+indeed_resul = requests.get("https://search.indeed.jobs/main/jobs?keywords=python&sortBy=relevance&page=1")
+
+print(indeed_resul)
