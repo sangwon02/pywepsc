@@ -1,5 +1,16 @@
 import requests
+from bs4 import BeautifulSoup
 
-indeed_resul = requests.get("https://search.indeed.jobs/main/jobs?keywords=python&sortBy=relevance&page=1")
+indeed_resul = requests.get("https://www.indeed.com/jobs?q=python&limit=50")
 
-print(indeed_resul)
+indeed_soup = BeautifulSoup(indeed_resul.text,"html.parser")
+
+pagination = indeed_soup.find("div", {"class":"pagination"})
+
+pages = pagination.find_all('a')
+spans = []
+
+for page in pages:
+    spans.append(page.find("span"))
+
+print(spans[:-1])
